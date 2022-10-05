@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "fix:prettier": "prettier --write .",
-    "prepare": "npx lint-staged"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^1.12.0",
