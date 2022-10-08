@@ -5,7 +5,9 @@ const ModularBox: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
   return (
-    <div className={`rounded-lg shadow-md p-4 h-28 w-28 ${className}`}>
+    <div
+      className={`rounded-lg shadow-md p-4 h-[10rem] w-[10rem] ${className}`}
+    >
       {children}
     </div>
   );

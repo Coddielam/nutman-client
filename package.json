@@ -11,10 +11,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.0",
     "@stripe/react-stripe-js": "^1.12.0",
     "@stripe/stripe-js": "^1.38.1",
     "axios": "^0.27.2",
     "eslint-config-prettier": "^8.5.0",
+    "graphql": "^16.6.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "micro": "^9.4.1",

@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from './Typography';
 import { CgShoppingCart } from 'react-icons/cg';
 import Image from 'next/image';
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 
 interface IProductCardProps {
   imageUrl?: string;
@@ -15,8 +16,14 @@ const ProductCard: React.FC<IProductCardProps> = ({
 }) => {
   return (
     <div className="rounded-lg pb-2 shadow-md max-w-[212.5px] overflow-clip bg-white">
-      <div className="w-full h-[212.5px] relative mb-2">
-        <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
+      <div className="w-full h-[212.5px] relative mb-2 overflow-clip">
+        <Image
+          src={imageUrl}
+          alt={title}
+          layout="fill"
+          objectFit="cover"
+          objectPosition="top"
+        />
       </div>
       <div className="px-2">
         <Typography variant="Paragraph" bold>
@@ -26,6 +33,21 @@ const ProductCard: React.FC<IProductCardProps> = ({
           <Typography variant="Paragraph" bold={true}>
             ${price.toLocaleString()}
           </Typography>
+          <div className="flex items-center w-full py-2">
+            <button>
+              <AiFillMinusCircle className="w-5 h-5 shadow-sm rounded-full" />
+            </button>
+            <input
+              type="text"
+              defaultValue="0"
+              inputMode="numeric"
+              className="w-8 h-8 mx-2 shadow-sm border border-[lightgray] text-center"
+            />
+            <button>
+              <AiFillPlusCircle className="w-5 h-5 shadow-sm rounded-full" />
+            </button>
+          </div>
+
           <button className="flex p-2 rounded-md items-center shadow-sm bg-yellow">
             <Typography variant="Paragraph" bold>
               Add to cart

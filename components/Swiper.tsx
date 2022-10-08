@@ -12,7 +12,7 @@ const StyledSwiper: React.FC<StyledSwiperProps> = ({
 }) => {
   return (
     <Swiper
-      className="w-full !p-2 !py-5"
+      className="w-full !p-2 !py-5 h-32"
       spaceBetween={50}
       slidesPerView={1}
       {...swiperProps}
