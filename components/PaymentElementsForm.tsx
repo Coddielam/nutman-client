@@ -4,6 +4,7 @@ import {
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
+import Typography from './Typography';
 
 const PaymentElementsForm: React.FC = () => {
   const stripe = useStripe();
@@ -72,13 +73,24 @@ const PaymentElementsForm: React.FC = () => {
   }, [stripe]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <PaymentElement />
       {isLoading && <div>Loading spinner</div>}
       {!isLoading && (
-        <button disabled={!stripe || !elements}>Submit payment</button>
+        <button
+          className="bg-blue px-4 py-2 rounded-sm shadow-sm"
+          disabled={!stripe || !elements}
+        >
+          <Typography variant="Paragraph" color="white">
+            Submit payment
+          </Typography>
+        </button>
       )}
-      {message && <div>{message}</div>}
+      {message && (
+        <Typography variant="Paragraph" color="red">
+          {message}
+        </Typography>
+      )}
     </form>
   );
 };

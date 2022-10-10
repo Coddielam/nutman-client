@@ -13,11 +13,12 @@ module.exports = {
     },
     colors: {
       black: '#313638',
-      orange: '#ff934f',
-      'dark-blue': '#2B2D42',
       blue: '#5299D3',
       yellow: '#FDE74C',
       white: '#FDFFFC',
+      platinum: '#ecece9',
+      orange: '#ff934f',
+      'dark-blue': '#2B2D42',
     },
     extend: {
       spacing: {

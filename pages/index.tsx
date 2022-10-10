@@ -85,7 +85,8 @@ const Home: NextPage<{
               {products.map((product) => {
                 return (
                   <ProductCard
-                    imageUrl={
+                    productId={product.id}
+                    imgUrl={
                       product.attributes.product_img.data[0].attributes.formats
                         .medium.url
                     }

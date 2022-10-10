@@ -1,6 +1,7 @@
 import client from '@root/apollo-client';
 import gql from 'graphql-tag';
 
+// Query popular products
 export interface IPopularProduct {
   id: string;
   attributes: {
@@ -63,6 +64,7 @@ export const queryPopularProducts = async () => {
   return data.products;
 };
 
+// Query all existing categories
 export interface IProductCategory {
   id: string;
   attributes: {
@@ -92,4 +94,110 @@ export const queryProductCategories = async () => {
   });
 
   return data.productCategories;
+};
+
+/*
+ Query all product ids
+ (this is used for dynamic route: /product/[id]) - see getStaticPaths
+*/
+interface IAllProductIdsRes {
+  products: {
+    data: {
+      id: string;
+    }[];
+  };
+}
+
+export const queryAllProductIds = async () => {
+  const { data } = await client.query<IAllProductIdsRes>({
+    query: gql`
+      query {
+        products(pagination: { limit: 100 }) {
+          data {
+            id
+          }
+        }
+      }
+    `,
+  });
+
+  return data;
+};
+
+// Query product by id
+export interface IProductDetail {
+  id: string;
+  attributes: {
+    product_name_cn: string;
+    product_desc_cn: string;
+    product_price: number;
+    product_categories: {
+      data: { attributes: { category_name: 'string' } }[];
+    };
+    product_img: {
+      data: {
+        attributes: {
+          formats: {
+            thumbnail: {
+              url: string;
+            };
+            small: {
+              url: string;
+            };
+            medium: {
+              url: string;
+            };
+            large: {
+              url: string;
+            };
+          };
+        };
+      }[];
+    };
+  };
+}
+
+export interface IProductDetailRes {
+  product: {
+    data: IProductDetail;
+  };
+}
+
+export const queryProductById = async (id: string) => {
+  const { data } = await client.query<IProductDetailRes>({
+    query: gql`
+      # Write your query or mutation here
+      query Product($id: ID!) {
+        product(id: $id) {
+          data {
+            id
+            attributes {
+              product_name_cn
+              product_desc_cn
+              product_price
+              product_categories {
+                data {
+                  attributes {
+                    category_name
+                  }
+                }
+              }
+              product_img {
+                data {
+                  attributes {
+                    formats
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      id,
+    },
+  });
+
+  return data.product;
 };
