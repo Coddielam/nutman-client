@@ -47,6 +47,7 @@ export const useQuantityInput = ({ defaultValue = 0 }) => {
 
   return {
     quantity,
+    setQuantity,
     QuantityInput: () => (
       <QuantityInput quantity={quantity} setQuantity={setQuantity} />
     ),
