@@ -30,7 +30,7 @@ const PaymentElementsForm: React.FC = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${process.env.URL!}/paymentSuccess`,
+        return_url: `${process.env.SITE_URL!}/paymentSuccess`,
       },
     });
 
