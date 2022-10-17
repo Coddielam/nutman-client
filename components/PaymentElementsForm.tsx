@@ -8,6 +8,8 @@ import Typography from './Typography';
 import { CgSpinner } from 'react-icons/cg';
 import { useTranslation } from 'react-i18next';
 
+const siteURL = process.env.SITE_URL!;
+
 const PaymentElementsForm: React.FC = () => {
   const { t } = useTranslation('common', { keyPrefix: 'checkout' });
   const stripe = useStripe();
@@ -30,7 +32,7 @@ const PaymentElementsForm: React.FC = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${process.env.SITE_URL!}/paymentSuccess`,
+        return_url: `${siteURL}/paymentSuccess`,
       },
     });
 
