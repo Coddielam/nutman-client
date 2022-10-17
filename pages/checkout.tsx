@@ -453,6 +453,7 @@ const CheckoutPage: NextPage = () => {
                   appearance: {
                     theme: 'stripe',
                   },
+                  locale: i18n.language === 'en' ? 'en' : 'zh-HK',
                 }}
               >
                 <PaymentElementsForm />
