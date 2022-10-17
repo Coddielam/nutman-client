@@ -7,7 +7,7 @@ export default React.forwardRef<
   return (
     <input
       ref={ref}
-      className="border-[1px] border-platinum rounded-md shadow-sm p-2"
+      className="border-[1px] border-platinum rounded-md shadow-sm p-2 max-w-full"
       {...otherProps}
     />
   );

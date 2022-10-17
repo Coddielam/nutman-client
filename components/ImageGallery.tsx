@@ -32,10 +32,9 @@ const SwiperThumbnailPagination = ({ images }: IImageGallery) => {
             <Image
               alt={img.title}
               src={img.thumbnail.url}
-              layout="fill"
+              width={100}
+              height={100}
               objectFit="cover"
-              height="20"
-              width="20"
             />
           </div>
         );
@@ -44,7 +43,7 @@ const SwiperThumbnailPagination = ({ images }: IImageGallery) => {
   );
 };
 
-const ImageGallery: React.FC<IImageGallery> = ({ images }) => {
+const ImageGallery: React.FC<Pick<IImageGallery, 'images'>> = ({ images }) => {
   return (
     <div className="p-2 mb-[68px]">
       <Swiper
@@ -62,6 +61,7 @@ const ImageGallery: React.FC<IImageGallery> = ({ images }) => {
                 layout="fill"
                 objectFit="contain"
                 objectPosition="cneter"
+                priority={true}
               />
             ),
           };

@@ -278,10 +278,11 @@ const CheckoutPage: NextPage = () => {
               />
             </div>
             {/* delivery options */}
-            <div>
+            <div className="inline-block">
               <label htmlFor="delivery_option">{t('deliveryPreference')}</label>
               <div className="p-2">
                 <select
+                  className="max-w-full"
                   id="delivery_option"
                   name="delivery_option"
                   value={deliveryInfo.deliveryMethod}

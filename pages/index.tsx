@@ -49,6 +49,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                     .medium.url
                 }
                 alt=""
+                priority={true}
               />
             ),
           };

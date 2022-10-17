@@ -67,7 +67,7 @@ const ProductCard: React.FC<IProductCardProps> = ({
     <div className="rounded-lg pb-2 shadow-md max-w-[212.5px] overflow-clip bg-white">
       <div className="w-full h-[212.5px] relative mb-2 overflow-clip">
         <Link href={`/product/${productId}`} passHref>
-          <a>
+          <a className="relative block h-full w-full">
             <Image
               src={imgUrl}
               alt={i18n.language === 'en' ? product_name_en : product_name_cn}

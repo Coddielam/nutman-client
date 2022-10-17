@@ -32,7 +32,6 @@ const StyledSwiper: React.FC<TStyledSwiperProps> = ({
       slidesPerView={slidesPerView ?? 1}
       {...otherSwiperProps}
     >
-      {children}
       {slides.map(({ id, content }) => {
         return (
           <SwiperSlide
@@ -46,6 +45,7 @@ const StyledSwiper: React.FC<TStyledSwiperProps> = ({
           </SwiperSlide>
         );
       })}
+      {children}
     </Swiper>
   );
 };
