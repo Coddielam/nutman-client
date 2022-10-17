@@ -5,19 +5,26 @@ import Image from 'next/image';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { CartContext } from '@root/context/cart';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 interface IProductCardProps {
   productId: string;
   imgUrl?: string;
-  title: string;
+  product_name_cn: string;
+  product_name_en: string;
   price: number;
 }
 const ProductCard: React.FC<IProductCardProps> = ({
   productId,
   imgUrl = '/placeholder-nuts.jpeg',
-  title,
+  product_name_cn,
+  product_name_en,
   price,
 }) => {
+  const { t, i18n } = useTranslation('common', {
+    keyPrefix: 'component.productCart',
+  });
+
   const { dispatchCartState } = useContext(CartContext)!;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -31,7 +38,13 @@ const ProductCard: React.FC<IProductCardProps> = ({
     dispatchCartState({
       type: 'ADD_TO_CART',
       payload: {
-        product: { title, price, imgUrl },
+        product: {
+          id: productId,
+          product_name_cn,
+          product_name_en,
+          price,
+          imgUrl,
+        },
         quantity: Number(inputRef.current.value),
       },
     });
@@ -57,7 +70,7 @@ const ProductCard: React.FC<IProductCardProps> = ({
           <a>
             <Image
               src={imgUrl}
-              alt={title}
+              alt={i18n.language === 'en' ? product_name_en : product_name_cn}
               layout="fill"
               objectFit="cover"
               objectPosition="top"
@@ -67,7 +80,7 @@ const ProductCard: React.FC<IProductCardProps> = ({
       </div>
       <div className="px-2">
         <Typography variant="Paragraph" bold>
-          {title}
+          {i18n.language === 'en' ? product_name_en : product_name_cn}
         </Typography>
         <div className="border-t-2 border-t-[lightgray] rounded-md py-2 mt-2">
           <Typography variant="Paragraph" bold={true}>
@@ -95,10 +108,10 @@ const ProductCard: React.FC<IProductCardProps> = ({
 
           <button
             onClick={handleAddToCartOnClick}
-            className="flex p-2 rounded-md items-center shadow-sm bg-yellow"
+            className="flex p-2 rounded-md items-center shadow-sm bg-orange bg-opacity-90"
           >
             <Typography variant="Paragraph" bold>
-              Add to cart
+              {t('addToCart')}
               <CgShoppingCart className="inline-block ml-2" />
             </Typography>
           </button>

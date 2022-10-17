@@ -14,13 +14,25 @@ import {
   InferGetStaticPropsType,
   NextPage,
 } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
 import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const { products } = await queryAllProductIds();
 
+  const paths = locales!
+    .map((locale) => {
+      return products.data.map((e) => ({
+        params: { id: e.id },
+        locale: locale,
+      }));
+    })
+    .flat();
+
   return {
-    paths: products.data.map((e) => ({ params: { id: e.id } })),
+    paths,
     fallback: false,
   };
 };
@@ -32,6 +44,7 @@ export const getStaticProps: GetStaticProps<
   const { data } = await queryProductById(context.params!.id);
   return {
     props: {
+      ...(await serverSideTranslations(context.locale!, ['common'])),
       productDetails: data,
     },
   };
@@ -40,12 +53,16 @@ export const getStaticProps: GetStaticProps<
 const ProductDetail: NextPage<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ productDetails }) => {
+  const { t, i18n } = useTranslation('common');
+
   const {
     product_name_cn,
+    product_desc_en,
     product_img,
     product_categories,
     product_price,
     product_desc_cn,
+    product_name_en,
   } = productDetails.attributes;
 
   const { quantity, setQuantity, QuantityInput } = useQuantityInput({
@@ -60,7 +77,9 @@ const ProductDetail: NextPage<
       type: 'ADD_TO_CART',
       payload: {
         product: {
-          title: product_name_cn,
+          id: productDetails.id,
+          product_name_cn,
+          product_name_en,
           price: product_price,
           imgUrl: product_img.data[0].attributes.formats.medium.url,
         },
@@ -71,28 +90,38 @@ const ProductDetail: NextPage<
   };
 
   return (
-    <div>
-      <main className="pb-32">
+    <>
+      <Head>
+        <title>{t('product.head.title')}</title>
+      </Head>
+      <main className="pb-20">
         <ImageGallery
           images={product_img.data.map((img) => {
             return {
-              title: product_name_cn,
+              title: i18n.language === 'en' ? product_name_en : product_name_cn,
               medium: img.attributes.formats.medium,
               thumbnail: img.attributes.formats.thumbnail,
             };
           })}
         />
         {/* product details */}
-        <div className="pt-4 px-container-px">
+        <div className="pt-4 px-container-px mb-10">
           <div className="flex gap-3 mb-2">
             {product_categories.data.map((category) => {
               return (
                 <span
-                  key={category.attributes.category_name}
+                  key={
+                    i18n.language === 'en'
+                      ? category.attributes.category_name_en
+                      : category.attributes.category_name
+                  }
                   className="px-1 bg-platinum rounded-sm shadow-sm"
                 >
                   <Typography variant="InlineText" color="dark-blue">
-                    #{category.attributes.category_name}
+                    #
+                    {i18n.language === 'en'
+                      ? category.attributes.category_name_en
+                      : category.attributes.category_name}
                   </Typography>
                 </span>
               );
@@ -100,33 +129,40 @@ const ProductDetail: NextPage<
           </div>
 
           <div className="flex justify-between my-4">
-            <Typography variant="PageTitle">{product_name_cn}</Typography>
+            <Typography variant="PageTitle">
+              {i18n.language === 'en' ? product_name_en : product_name_cn}
+            </Typography>
             <Typography variant="PageTitle">${product_price}</Typography>
           </div>
 
           <div className="border-y-[lightgray] border-y-[1px]">
-            <Accordion title="Product description" defaultOpen>
-              <div>{product_desc_cn ?? '-'}</div>
+            <Accordion title={t('product.id.productDescription')} defaultOpen>
+              <div className="px-3 prose">
+                {(i18n.language === 'en' ? product_desc_en : product_desc_cn) ||
+                  '-'}
+              </div>
             </Accordion>
           </div>
-
-          <div className="fixed left-0 bottom-0 w-full px-4 py-2 bg-white opacity-95 shadow-lg shadow-[black] flex mt-4 items-center gap-4 justify-start">
-            <Typography variant="Subtitle">Add to cart</Typography>
-            <div>
-              <QuantityInput />
-            </div>
-            <button
-              className="ml-auto bg-orange shadow-sm rounded-sm px-2 py-1 shadow-platinum opacity-100"
-              onClick={handleAddToCart}
-            >
-              <Typography variant="InlineText" bold color="white">
-                Confirm
-              </Typography>
-            </button>
+        </div>
+        {/* Add to cart */}
+        <div className="w-full px-4 py-2 bg-platinum bg-opacity-20 shadow-sm flex mt-4 items-center gap-4 justify-start">
+          <Typography variant="Subtitle">
+            {t('component.productCart.addToCart')}
+          </Typography>
+          <div>
+            <QuantityInput />
           </div>
+          <button
+            className="ml-auto bg-orange shadow-sm rounded-sm px-2 py-1 shadow-platinum opacity-100"
+            onClick={handleAddToCart}
+          >
+            <Typography variant="InlineText" bold color="white">
+              {t('product.id.confirm')}
+            </Typography>
+          </button>
         </div>
       </main>
-    </div>
+    </>
   );
 };
 

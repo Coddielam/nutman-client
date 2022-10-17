@@ -1,12 +1,29 @@
-import { IPopularProduct } from '@services/productServices';
-import React, { Dispatch, ReactNode, useReducer } from 'react';
+import {
+  IProductCategoriesIdsAndName,
+  queryAllProductCategoryIds,
+} from '@services/productServices';
+import React, {
+  Dispatch,
+  ReactNode,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
 
-type ICartState = { title: string; price: number; imgUrl: string }[];
+export type ICartProduct = {
+  id: string;
+  product_name_cn: string;
+  product_name_en: string;
+  price: number;
+  imgUrl: string;
+};
+
+type ICartState = ICartProduct[];
 
 interface ICartAction {
   type: 'ADD_TO_CART' | 'UPDATE_ITEM_QUANTITY';
   payload: {
-    product: { title: string; price: number; imgUrl: string };
+    product: ICartProduct;
     quantity: number;
   };
 }
@@ -24,7 +41,7 @@ const cartReducer = (state: ICartState, action: ICartAction) => {
 
   if (type === 'UPDATE_ITEM_QUANTITY') {
     return [
-      ...state.filter((item) => item.title !== product.title),
+      ...state.filter((item) => item.id !== product.id),
       ...Array(quantity).fill(product),
     ];
   }
@@ -35,6 +52,7 @@ const cartReducer = (state: ICartState, action: ICartAction) => {
 export const CartContext = React.createContext<{
   cartState: ICartState;
   dispatchCartState: Dispatch<ICartAction>;
+  categories: IProductCategoriesIdsAndName[];
 } | null>(null);
 
 const CartContextWrapper = ({
@@ -43,12 +61,23 @@ const CartContextWrapper = ({
   children: ReactNode | ReactNode[];
 }) => {
   const [cartState, dispatchCartState] = useReducer(cartReducer, defaultState);
+  const [categories, setCategories] = useState<IProductCategoriesIdsAndName[]>(
+    []
+  );
+  useEffect(() => {
+    const getCategories = async () => {
+      const { productCategories } = await queryAllProductCategoryIds();
+      setCategories(productCategories.data);
+    };
+    getCategories();
+  }, []);
 
   return (
     <CartContext.Provider
       value={{
         cartState,
         dispatchCartState,
+        categories,
       }}
     >
       {children}

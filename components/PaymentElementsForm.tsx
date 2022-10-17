@@ -1,12 +1,15 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState, useRef } from 'react';
 import {
   PaymentElement,
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
 import Typography from './Typography';
+import { CgSpinner } from 'react-icons/cg';
+import { useTranslation } from 'react-i18next';
 
 const PaymentElementsForm: React.FC = () => {
+  const { t } = useTranslation('common', { keyPrefix: 'checkout' });
   const stripe = useStripe();
   const elements = useElements();
 
@@ -27,7 +30,7 @@ const PaymentElementsForm: React.FC = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: 'http://localhost:3000',
+        return_url: 'http://localhost:3000/paymentSuccess',
       },
     });
 
@@ -57,40 +60,50 @@ const PaymentElementsForm: React.FC = () => {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent!.status) {
         case 'succeeded':
-          setMessage('Payment succeeded!');
+          setMessage(t('stripeMsg.succeeded'));
           break;
         case 'processing':
-          setMessage('Your payment is processing.');
+          setMessage(t('stripeMsg.processing'));
           break;
         case 'requires_payment_method':
-          setMessage('Your payment was not successful, please try again.');
+          setMessage(t('stripeMsg.requires_payment_method'));
           break;
         default:
-          setMessage('Something went wrong.');
+          setMessage(t('stripeMsg.something_went_wrong'));
           break;
       }
     });
-  }, [stripe]);
+  }, [stripe, t]);
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      <PaymentElement />
-      {isLoading && <div>Loading spinner</div>}
-      {!isLoading && (
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-3 divide-solid divide-y-[1px] divide-platinum"
+    >
+      <div className="flex flex-col py-3 mb-16">
+        <Typography variant="Subtitle">{t('paymentInformation')}</Typography>
+        {/* Stripe Payment */}
+        <PaymentElement className="pt-5 py-3" />
+
         <button
-          className="bg-blue px-4 py-2 rounded-sm shadow-sm"
+          className="bg-blue px-4 py-2 rounded-sm shadow-sm flex justify-center h-10"
           disabled={!stripe || !elements}
         >
-          <Typography variant="Paragraph" color="white">
-            Submit payment
-          </Typography>
+          {isLoading ? (
+            <CgSpinner className="animate-spin" />
+          ) : (
+            <Typography variant="Paragraph" color="white">
+              {t('submitOrder')}
+            </Typography>
+          )}
         </button>
-      )}
-      {message && (
-        <Typography variant="Paragraph" color="red">
-          {message}
-        </Typography>
-      )}
+
+        {message && (
+          <Typography variant="Paragraph" color="red">
+            {message}
+          </Typography>
+        )}
+      </div>
     </form>
   );
 };

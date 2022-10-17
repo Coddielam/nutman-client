@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "description": "Shop for reasonably priced nuts and healthy snacks at Nutman. Nutman include a diverse selection of nuts sourced all over the world: United States Pecans and Almonds, China and Indian Cashew, Cambodia Dried mango slcies, and many other nuts."
+  },
+  "locale": {
+    "en": "English",
+    "zh-HK": "繁體中文"
+  },
+  "home": {
+    "head": {
+      "title": "Nutman | Shop Reasonably Priced Nuts At Ease"
+    },
+    "topCategory": "All Categories",
+    "popularProducts": "Most Popular",
+    "morePopularProducts": "More Popular Products",
+    "paymentFlow": "Shopping process illustration"
+  },
+  "product": {
+    "head": {
+      "title": "Nutman | Shop Reasonably Priced Nuts At Ease"
+    },
+    "id": {
+      "confirm": "Confirm",
+      "productDescription": "Description"
+    }
+  },
+  "category": {
+    "head": {
+      "title": "Nutman | Shop Reasonably Priced Nuts At Ease"
+    }
+  },
+  "checkout": {
+    "head": {
+      "title": "Nutman | Contact Information and Checkout"
+    },
+    "cartIsEmpty": "Your cart is empty",
+    "exploreProducts": "Look for products",
+    "itemTotal": "Item total:",
+    "updateQuantity": "Update Quantity",
+    "addingShipping": "Adding shipping",
+    "orderTotal": "Order Total:",
+    "adjustedOrderTotal": "Adjusted Order Total:",
+    "contactAndDelivery": "Contact & Delivery",
+    "name": "Name",
+    "namePlaceholder": "e.g. John Doe",
+    "email": "Email",
+    "emailPlaceholder": "e.g. johndoe@email.com",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "e.g.: 12345678",
+    "deliveryPreference": "Delivery Preference",
+    "selectAMethod": "Please Select",
+    "inPerson": "In-Person",
+    "delivery": "Pickup (SF Express Station)",
+    "deliveryCostWarningMessage": "* We offer free delivery on order of $500 or above; A delivery cost of $25 will be added to your order since its currently below the thredshold",
+    "deliveryMethodReminder": "* We will have your order delivered to the nearest SF station near your address; You will receive an SMS once the delivery has been arranged",
+    "city": "City",
+    "cityPlaceholder": "e.g.: Kowloon City",
+    "country": "Country/Region",
+    "line1": "Address Line 1",
+    "line1Placeholder": "e.g.: 1 To Kwa Wan Rd",
+    "line2": "Address Line 2 (If Applicable)",
+    "line2Placeholder": "e.g. Room 1A John's Building",
+    "region": "Region",
+    "regionPlaceholder": "e.g.: Kowloon",
+    "inPersonInstruction": "We will reach out via SMS to arrange in-person exchange time and location.",
+    "errorMsg": "Please make sure you have filled out every fields",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "paymentInformation": "Payment Method",
+    "submitOrder": "Submit Order",
+    "stripeMsg": {
+      "succeeded": "Payment Successful",
+      "processing": "Processing",
+      "requires_payment_method": "Payment failed. Please try again.",
+      "something_went_wrong": "Payment failed. Please retry or contact us"
+    }
+  },
+  "paymentSuccess": {
+    "head": {
+      "title": "Nutman | Payment Success"
+    },
+    "oops": "Oops! You shouldn't be here. Returning you to home page.",
+    "paymentConfirmedMsg": "Thank you! Your payment has been confirmed",
+    "paymentId": "Your payment id:",
+    "rememberPaymentIdMsg": "Please keep a copy of your payment ID; You will need to provide this for us to reference your order.",
+    "youWillReceiveEmailReceiptSoon": "You will receive a email receipt soon. Should you have any questions or concerns, please contact us through Whatsapp.",
+    "continueShopping": "Continue Shopping"
+  },
+  "404": {
+    "badLink": "It seems the page you're looking for no longer exists...",
+    "goHome": "Back to home page"
+  },
+  "component": {
+    "productCart": {
+      "addToCart": "Add to Cart"
+    },
+    "footer": {
+      "address": "Kin Wo Tong 127B Ma Tau Way Rd, Kowloon City, Kowloon, Hong Kong",
+      "followUsOnSocialMedia": "Follow Us"
+    },
+    "navbar": {
+      "categories": "Categories"
+    },
+    "paymentFlow": {
+      "step1": {
+        "title": "Add products to cart",
+        "desc": "You can find products from each category and add them to your cart."
+      },
+      "step2": {
+        "title": "Fill out contact and delivery preference",
+        "desc": "You will receive email receipt and phone message with updates of your order status."
+      },
+      "step3": {
+        "title": "Pay securely online with dozens of methods to choose from",
+        "desc": "You can choose to pay with credit card or with popular payment service provider like Alipay."
+      },
+      "step4": {
+        "title": "Get delivered",
+        "desc": "You may choose to have your order delivered to the nearest SF station near your address. Or you may pick them up in-person -- in which we will contact you to set up a time and location that works for you."
+      },
+      "step5": {
+        "title": "Order delivered",
+        "desc": "If you have any inquiry about your order, do not hesitate to reach us via our number at any time."
+      }
+    }
+  }
+}

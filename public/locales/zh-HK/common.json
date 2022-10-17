@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "description": "在果人網上健康零食店購買心儀價錢的健康果仁及健康零食。果人產品源自自世界各地，包括：美國碧根果及杏仁，中國腰果，印度腰果，柬埔寨芒果乾，以及其他多款乾果產品。"
+  },
+  "locale": {
+    "en": "English",
+    "zh-HK": "繁體中文"
+  },
+  "home": {
+    "head": {
+      "title": "果人 | 選購心儀價錢的果仁及零食"
+    },
+    "topCategory": "果仁類別",
+    "popularProducts": "最受歡迎",
+    "morePopularProducts": "更多今期熱門",
+    "paymentFlow": "購物流程簡介"
+  },
+  "product": {
+    "head": {
+      "title": "果人 | 選購心儀價錢的果仁及零食"
+    },
+    "id": {
+      "confirm": "確認",
+      "productDescription": "簡介"
+    }
+  },
+  "category": {
+    "head": {
+      "title": "果人 | 選購心儀價錢的果仁及零食"
+    }
+  },
+  "checkout": {
+    "head": {
+      "title": "果人 | 聯絡資料及結帳"
+    },
+    "cartIsEmpty": "你的購物車很空虛",
+    "exploreProducts": "查找產品",
+    "itemTotal": "合共:",
+    "updateQuantity": "更新數量",
+    "addingShipping": "加運費",
+    "orderTotal": "全單合共:",
+    "adjustedOrderTotal": "更改後全單合共:",
+    "contactAndDelivery": "聯絡及送貨資料",
+    "name": "名稱",
+    "namePlaceholder": "例如：陳大文",
+    "email": "電郵地址",
+    "emailPlaceholder": "例如：chantaiman@email.com",
+    "phoneNumber": "電話號碼",
+    "phoneNumberPlaceholder": "例如：12345678",
+    "deliveryPreference": "送貨偏好",
+    "selectAMethod": "請選擇",
+    "inPerson": "當面交收",
+    "delivery": "順豐站自取",
+    "deliveryCostWarningMessage": "* 我們提供免運費當全單總值達$500或以上；你的訂單因未達到免運費上限，因此我們會另外收取$25運費。",
+    "deliveryMethodReminder": "* 我們會安排送貨至最接近你地址的順豐站；當貨物送出，你將會收到短信確認。",
+    "city": "城市",
+    "cityPlaceholder": "例如：九龍城",
+    "country": "國家/地區",
+    "line1": "地址",
+    "line1Placeholder": "例如：1 土瓜灣道",
+    "line2": "地址(第二行；如適用)",
+    "line2Placeholder": "例如：18樓 A室",
+    "region": "區域",
+    "regionPlaceholder": "例如：九龍",
+    "inPersonInstruction": "我們會透過短信聯絡閣下訂立交收安排",
+    "errorMsg": "請確保已填寫所有項目",
+    "confirm": "確認",
+    "edit": "更改",
+    "paymentInformation": "付費方法",
+    "submitOrder": "提交訂單",
+    "stripeMsg": {
+      "succeeded": "付費成功",
+      "processing": "處理中",
+      "requires_payment_method": "付費失敗，請再試",
+      "something_went_wrong": "付費失敗，請再試或聯絡店員"
+    }
+  },
+  "paymentSuccess": {
+    "head": {
+      "title": "果人 | 付款成功"
+    },
+    "oops": "呃。。。 你不應該在這裡的。。。 正在把你送回主頁面",
+    "paymentConfirmedMsg": "謝謝！我們已經確認了你的付費",
+    "paymentId": "你的付費確認碼：",
+    "rememberPaymentIdMsg": "勞煩把你的付費確認碼記起來，以便日後有需要時我們幫查找你的訂單",
+    "youWillReceiveEmailReceiptSoon": "你很快就會收到一封電郵收據。如果你對你的訂單有疑問，請隨時聯絡我們。謝謝！",
+    "continueShopping": "再看看其他產品"
+  },
+  "404": {
+    "head": {
+      "title": "果人 | 網頁不存在"
+    },
+    "badLink": "你想找的頁面看來並不存在",
+    "goHome": "回到主頁"
+  },
+  "component": {
+    "productCart": {
+      "addToCart": "新增到購物單"
+    },
+    "footer": {
+      "address": "香港 九龍 九龍城 馬頭圍道 127B 健和堂",
+      "followUsOnSocialMedia": "追蹤我們"
+    },
+    "navbar": {
+      "categories": "果仁種類"
+    },
+    "paymentFlow": {
+      "step1": {
+        "title": "添加產品到購物車",
+        "desc": "你可以透過不同產品類別找到不同的產品。"
+      },
+      "step2": {
+        "title": "填寫內的聯絡及送貨資料",
+        "desc": "你會透過電郵收到收據及透過短信收取訂單最新的更新。"
+      },
+      "step3": {
+        "title": "揀選常用的付款方法付款",
+        "desc": "你可以選用不同的信用卡或其他付款方法，例如AliPay進行付款。"
+      },
+      "step4": {
+        "title": "收取貨品",
+        "desc": "你可以選擇將訂購送到最鄰近的順豐站，或透過面交形式收取貨品 -- 若你選擇以面交方式收取訂購，我們會以短信方式與你訂立最方便你的交收時間和地點"
+      },
+      "step5": {
+        "title": "收到貨品後",
+        "desc": "如果你對你的訂購有任何查詢，請隨時聯絡我們。"
+      }
+    }
+  }
+}

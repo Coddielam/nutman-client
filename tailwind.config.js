@@ -19,11 +19,17 @@ module.exports = {
       platinum: '#ecece9',
       orange: '#ff934f',
       'dark-blue': '#2B2D42',
+      green: '#00A56A',
+      purple: '#8F00FF',
     },
     extend: {
       spacing: {
         navbar: 'var(--navbar-height)',
         'container-px': 'var(--container-px)',
+      },
+      colors: {
+        red: '#f94449',
+        purple: '#7600bc',
       },
     },
   },

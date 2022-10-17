@@ -1,4 +1,3 @@
-import { PaymentIntentConfirmParams } from '@stripe/stripe-js';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
@@ -13,38 +12,15 @@ export default async function handler(
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     res.status(405).end('Method Not Allowed');
-    return;
   }
 
   const {
-    amount,
-    receipt_email,
-    metadata,
-    description,
-    shipping,
-  }: {
-    amount: number;
-    receipt_email: string;
-    metadata: Stripe.MetadataParam;
-    description: string;
-    shipping: PaymentIntentConfirmParams.Shipping;
-  } = req.body;
+    intent_id,
+  }: { intent_id: string; payment_intent_client_secret: string } = req.body;
 
   try {
-    const params: Stripe.PaymentIntentCreateParams = {
-      amount,
-      currency: 'HKD',
-      receipt_email,
-      metadata,
-      description,
-      automatic_payment_methods: {
-        enabled: true,
-      },
-      shipping,
-    };
-
     const payment_intent: Stripe.PaymentIntent =
-      await stripe.paymentIntents.create(params);
+      await stripe.paymentIntents.retrieve(intent_id);
 
     res.status(200).json(payment_intent);
   } catch (err) {
