@@ -93,6 +93,7 @@ const Navbar: React.FC = () => {
             '-translate-x-0': showMenu,
             '-translate-x-full': !showMenu,
             'opacity-0': !showMenu,
+            'pointer-events-none': !showMenu,
           }
         )}
       >

@@ -28,8 +28,6 @@ const PaymentElementsForm: React.FC = () => {
 
     setIsLoading(true);
 
-    console.log('URL:', siteURL);
-
     // complete payment with stripe
     const { error } = await stripe.confirmPayment({
       elements,

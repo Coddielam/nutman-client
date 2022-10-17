@@ -1,6 +1,7 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
 import Swiper from '@components/Swiper';
+import { Autoplay, Pagination } from 'swiper';
 import Section from '@components/Section';
 import Typography from '@components/Typography';
 import ModularBox from '@components/ModularBox';
@@ -69,6 +70,12 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <main>
         <div className="bg-platinum px-container-px">
           <Swiper
+            modules={[Autoplay, Pagination]}
+            autoplay={{
+              delay: 2400,
+              disableOnInteraction: false,
+            }}
+            pagination={{ enabled: true }}
             className="h-[250px] w-full py-2"
             slides={formattedPromoSlides ?? []}
             swiperSlideProps={{
