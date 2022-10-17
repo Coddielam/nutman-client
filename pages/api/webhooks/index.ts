@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { buffer } from 'stream/consumers';
 import Cors from 'micro-cors';
+import { buffer } from 'micro';
 
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
