@@ -8,7 +8,7 @@ import Typography from './Typography';
 import { CgSpinner } from 'react-icons/cg';
 import { useTranslation } from 'react-i18next';
 
-const siteURL = process.env.SITE_URL!;
+const siteURL = process.env.NEXT_PUBLIC_SITE_URL!;
 
 const PaymentElementsForm: React.FC = () => {
   const { t } = useTranslation('common', { keyPrefix: 'checkout' });
@@ -27,6 +27,8 @@ const PaymentElementsForm: React.FC = () => {
     }
 
     setIsLoading(true);
+
+    console.log('URL:', siteURL);
 
     // complete payment with stripe
     const { error } = await stripe.confirmPayment({
