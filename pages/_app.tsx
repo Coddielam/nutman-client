@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-3EKJ4KL0EP"
+        src="https://www.googletagmanager.com/gtag/js?id=G-P19MQG0QTE"
         strategy="afterInteractive"
       />
 
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-3EKJ4KL0EP');`}
+          gtag('config', 'G-P19MQG0QTE');`}
       </Script>
 
       <div className="max-w-md mx-auto h-vh relative transition-all duration-200">
