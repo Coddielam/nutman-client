@@ -1,3 +1,3 @@
 export enum DELIVERY {
-  SHIPPING_COST = 25,
+  SHIPPING_COST = 30,
 }
