@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         </li>
         <li className="flex items-center">
           <MdPhoneEnabled className="mr-2" />
-          +852 1234 5678
+          +852 9367 7839
         </li>
         <li className="flex items-center">
           <MdMail className="mr-2" /> nutman.nutstore@gmail.com

@@ -136,7 +136,7 @@ export const queryPromoSlides = async () => {
   const { data } = await client.query<IPromoSlideRes>({
     query: gql`
       query {
-        promoSlides {
+        promoSlides(sort: "order") {
           data {
             id
             attributes {
@@ -390,7 +390,7 @@ export const queryCategoryProductsById = async (category_id: string) => {
             attributes {
               category_name
               category_name_en
-              products {
+              products(pagination: { limit: 100 }) {
                 data {
                   id
                   attributes {
