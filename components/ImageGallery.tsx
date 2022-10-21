@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CusSwiper from '@components/Swiper';
 import Image from 'next/image';
 import { useSwiper } from 'swiper/react';
@@ -15,6 +15,16 @@ interface IImageGallery {
 
 const SwiperThumbnailPagination = ({ images, swiper }: IImageGallery) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  useEffect(() => {
+    const handleSlideChange = (swiper: Swiper) => {
+      setActiveIndex(swiper.activeIndex);
+    };
+    swiper.on('slideChange', handleSlideChange);
+
+    return () => {
+      swiper.off('slideChange', handleSlideChange);
+    };
+  }, [swiper]);
 
   return (
     <div className="flex pt-2 gap-1">
