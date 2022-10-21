@@ -48,7 +48,7 @@ const ImageGallery: React.FC<Pick<IImageGallery, 'images'>> = ({ images }) => {
   const [swiperRef, setSwiperRef] = useState<Swiper | null>(null);
 
   return (
-    <div className="p-2 mb-[68px]">
+    <div className="p-2">
       <CusSwiper
         onInit={(swiper) => {
           setSwiperRef(swiper);
