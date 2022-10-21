@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import Swiper from '@components/Swiper';
+import CusSwiper from '@components/Swiper';
 import Image from 'next/image';
 import { useSwiper } from 'swiper/react';
+import Swiper from 'swiper';
 
 interface IImageGallery {
   images: {
@@ -9,10 +10,10 @@ interface IImageGallery {
     medium: { url: string };
     thumbnail: { url: string };
   }[];
+  swiper: Swiper;
 }
 
-const SwiperThumbnailPagination = ({ images }: IImageGallery) => {
-  const swiper = useSwiper();
+const SwiperThumbnailPagination = ({ images, swiper }: IImageGallery) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
@@ -20,7 +21,7 @@ const SwiperThumbnailPagination = ({ images }: IImageGallery) => {
       {images.map((img, index) => {
         return (
           <div
-            className={`h-14 w-14 relative ${
+            className={`h-14 w-14 relative cursor-pointer ${
               activeIndex === index ? 'border-blue border-4' : ''
             }`}
             key={img.title + index.toString()}
@@ -44,9 +45,14 @@ const SwiperThumbnailPagination = ({ images }: IImageGallery) => {
 };
 
 const ImageGallery: React.FC<Pick<IImageGallery, 'images'>> = ({ images }) => {
+  const [swiperRef, setSwiperRef] = useState<Swiper | null>(null);
+
   return (
     <div className="p-2 mb-[68px]">
-      <Swiper
+      <CusSwiper
+        onInit={(swiper) => {
+          setSwiperRef(swiper);
+        }}
         className="w-full h-[250px] overflow-visible"
         swiperSlideProps={{
           className: 'rounded-none bg-platinum',
@@ -66,9 +72,10 @@ const ImageGallery: React.FC<Pick<IImageGallery, 'images'>> = ({ images }) => {
             ),
           };
         })}
-      >
-        <SwiperThumbnailPagination images={images} />
-      </Swiper>
+      ></CusSwiper>
+      {swiperRef && (
+        <SwiperThumbnailPagination images={images} swiper={swiperRef} />
+      )}
     </div>
   );
 };
