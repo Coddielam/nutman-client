@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['res.cloudinary.com'],
+    domains: ['nutman-strapi-images.s3.ap-northeast-1.amazonaws.com'],
   },
   i18n,
 };

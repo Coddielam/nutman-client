@@ -1,5 +1,10 @@
 import client from '@root/apollo-client';
 import gql from 'graphql-tag';
+import { graphql } from '@root/codegen/strapi/gql';
+
+// export const queryCategoryProducts = async () => {
+//   return useQuery(productsByCategoryQuery, { variables: { id: 1 } });
+// };
 
 // Query popular products
 export interface IProduct {
@@ -58,42 +63,42 @@ export interface IQueryPopularProductsRes {
   };
 }
 
-export const queryPopularProducts = async () => {
-  const { data } = await client.query<IQueryPopularProductsRes>({
-    query: gql`
-      query Products {
-        productCategory(id: 1) {
-          data {
-            id
-            attributes {
-              category_name
-              category_name_en
-              products(pagination: { page: 1, pageSize: 4 }) {
-                data {
-                  id
-                  attributes {
-                    product_name_cn
-                    product_name_en
-                    product_price
-                    product_img {
-                      data {
-                        attributes {
-                          formats
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `,
-  });
+// export const queryPopularProducts = async () => {
+//   const { data } = await client.query<IQueryPopularProductsRes>({
+//     query: gql`
+//       query Products {
+//         productCategory(id: 1) {
+//           data {
+//             id
+//             attributes {
+//               category_name
+//               category_name_en
+//               products(pagination: { page: 1, pageSize: 4 }) {
+//                 data {
+//                   id
+//                   attributes {
+//                     product_name_cn
+//                     product_name_en
+//                     product_price
+//                     product_img {
+//                       data {
+//                         attributes {
+//                           formats
+//                         }
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     `,
+//   });
 
-  return data.productCategory;
-};
+//   return data.productCategory;
+// };
 
 // query promotional slides
 export interface IPromoSlide {

@@ -1,4 +1,9 @@
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import type {
+  GetStaticProps,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+  NextPage,
+} from 'next';
 import Head from 'next/head';
 import Swiper from '@components/Swiper';
 import { Autoplay, Pagination } from 'swiper';
@@ -10,7 +15,6 @@ import {
   IProducts,
   IProductCategoryName,
   queryPromoSlides,
-  queryPopularProducts,
   queryProductCategories,
   IPromoSlide,
 } from '@services/productServices';
@@ -20,6 +24,28 @@ import { useTranslation } from 'react-i18next';
 import PaymentFlowIllu from '@components/PaymentFlowIllu';
 import Image from 'next/image';
 import { useMemo } from 'react';
+import { queryProductsByCategory } from '@root/utils/strapiQueries';
+import {
+  ProductCategoryEntityResponse,
+  ProductEntity,
+} from '@root/codegen/strapi/graphql';
+
+export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
+  const promoSlides = await queryPromoSlides();
+
+  const popularProducts = await queryProductsByCategory(1);
+
+  const productCategories = await queryProductCategories();
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!, ['common'])),
+      promoSlides: promoSlides.data,
+      popularProducts: popularProducts?.data,
+      productCategories: productCategories.data,
+    },
+  };
+};
 
 const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   promoSlides,
@@ -127,21 +153,25 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             className="relative px-container-px"
           >
             <div className="grid grid-cols-2 gap-4">
-              {popularProducts.attributes.products.data.map((product) => {
-                return (
-                  <ProductCard
-                    productId={product.id}
-                    imgUrl={
-                      product.attributes.product_img.data[0].attributes.formats
-                        .medium.url
-                    }
-                    key={product.id}
-                    product_name_en={product.attributes.product_name_en}
-                    product_name_cn={product.attributes.product_name_cn}
-                    price={product.attributes.product_price}
-                  />
-                );
-              })}
+              {popularProducts &&
+                popularProducts.attributes &&
+                popularProducts.attributes.products &&
+                popularProducts.attributes.products.data.map((product) => {
+                  if (!product.attributes) return <></>;
+                  return (
+                    <ProductCard
+                      productId={product.id!}
+                      imgUrl={
+                        product.attributes.product_img.data[0].attributes!
+                          .formats.thumbnail.url
+                      }
+                      key={product.id}
+                      product_name_en={product.attributes.product_name_en}
+                      product_name_cn={product.attributes.product_name_cn}
+                      price={product.attributes.product_price}
+                    />
+                  );
+                })}
             </div>
             <Link href="/category/6" passHref>
               <a className="bg-orange w-fit px-4 py-2 rounded-md shadow-md block mx-auto mt-8 mb-2 bg-opacity-90">
@@ -159,25 +189,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       </main>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps<{
-  promoSlides: IPromoSlide[];
-  popularProducts: IProducts;
-  productCategories: IProductCategoryName[];
-}> = async ({ locale }) => {
-  const promoSlides = await queryPromoSlides();
-  const populatProducts = await queryPopularProducts();
-  const productCategories = await queryProductCategories();
-
-  return {
-    props: {
-      ...(await serverSideTranslations(locale!, ['common'])),
-      promoSlides: promoSlides.data,
-      popularProducts: populatProducts.data,
-      productCategories: productCategories.data,
-    },
-  };
 };
 
 export default Home;
