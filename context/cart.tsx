@@ -1,7 +1,4 @@
-import {
-  IProductCategoriesIdsAndName,
-  queryAllProductCategoryIds,
-} from '@services/productServices';
+import { queryAllProductCategoriesIdsNames } from '@root/utils/strapiQueries';
 import React, {
   Dispatch,
   ReactNode,
@@ -9,6 +6,10 @@ import React, {
   useReducer,
   useState,
 } from 'react';
+import {
+  ProductCategory,
+  ProductCategoryEntity,
+} from '@root/codegen/strapi/graphql';
 
 export type ICartProduct = {
   id: string;
@@ -17,6 +18,8 @@ export type ICartProduct = {
   price: number;
   imgUrl: string;
 };
+
+type Unpromised<T> = T extends Promise<infer U> ? U : never;
 
 type ICartState = ICartProduct[];
 
@@ -52,7 +55,7 @@ const cartReducer = (state: ICartState, action: ICartAction) => {
 export const CartContext = React.createContext<{
   cartState: ICartState;
   dispatchCartState: Dispatch<ICartAction>;
-  categories: IProductCategoriesIdsAndName[];
+  categories: ProductCategoryEntity[];
 } | null>(null);
 
 const CartContextWrapper = ({
@@ -61,13 +64,12 @@ const CartContextWrapper = ({
   children: ReactNode | ReactNode[];
 }) => {
   const [cartState, dispatchCartState] = useReducer(cartReducer, defaultState);
-  const [categories, setCategories] = useState<IProductCategoriesIdsAndName[]>(
-    []
-  );
+  const [categories, setCategories] = useState<ProductCategoryEntity[]>([]);
   useEffect(() => {
     const getCategories = async () => {
-      const { productCategories } = await queryAllProductCategoryIds();
-      setCategories(productCategories.data);
+      const productCategories = await queryAllProductCategoriesIdsNames();
+      // @ts-ignore
+      setCategories(productCategories?.data || []);
     };
     getCategories();
   }, []);

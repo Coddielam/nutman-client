@@ -4,13 +4,8 @@ import Typography from '@components/Typography';
 import { CartContext } from '@root/context/cart';
 import { useQuantityInput } from '@root/hooks/useQuantityInput';
 import {
-  IProductDetail,
-  queryAllProductIds,
-  queryProductById,
-} from '@services/productServices';
-import {
   GetStaticPaths,
-  GetStaticProps,
+  GetStaticPropsContext,
   InferGetStaticPropsType,
   NextPage,
 } from 'next';
@@ -18,14 +13,24 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+  queryAllProductIds,
+  queryProductById,
+} from '@root/utils/strapiQueries';
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const { products } = await queryAllProductIds();
+  const products = await queryAllProductIds();
+
+  if (!products)
+    return {
+      paths: [],
+      fallback: false,
+    };
 
   const paths = locales!
     .map((locale) => {
       return products.data.map((e) => ({
-        params: { id: e.id },
+        params: { id: e.id! },
         locale: locale,
       }));
     })
@@ -37,15 +42,17 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   };
 };
 
-export const getStaticProps: GetStaticProps<
-  { productDetails: IProductDetail },
-  { id: string }
-> = async (context) => {
-  const { data } = await queryProductById(context.params!.id);
+export const getStaticProps = async (
+  context: GetStaticPropsContext<{ id: string }>
+) => {
+  const productDetail = await queryProductById(Number(context.params!.id));
+
+  console.log('productDetail:', productDetail);
+
   return {
     props: {
       ...(await serverSideTranslations(context.locale!, ['common'])),
-      productDetails: data,
+      productDetails: productDetail?.data,
     },
   };
 };
@@ -54,6 +61,34 @@ const ProductDetail: NextPage<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ productDetails }) => {
   const { t, i18n } = useTranslation('common');
+
+  const { quantity, setQuantity, QuantityInput } = useQuantityInput({
+    defaultValue: 0,
+  });
+
+  const { dispatchCartState } = useContext(CartContext)!;
+
+  if (!productDetails?.attributes) return <></>;
+
+  const handleAddToCart = () => {
+    if (quantity <= 0) return;
+    dispatchCartState({
+      type: 'ADD_TO_CART',
+      payload: {
+        product: {
+          id: productDetails.id!,
+          product_name_cn,
+          product_name_en,
+          price: product_price,
+          imgUrl:
+            product_img.data[0].attributes!.formats.medium?.url ||
+            product_img.data[0].attributes?.url,
+        },
+        quantity,
+      },
+    });
+    setQuantity(0);
+  };
 
   const {
     product_name_cn,
@@ -65,30 +100,6 @@ const ProductDetail: NextPage<
     product_name_en,
   } = productDetails.attributes;
 
-  const { quantity, setQuantity, QuantityInput } = useQuantityInput({
-    defaultValue: 0,
-  });
-
-  const { dispatchCartState } = useContext(CartContext)!;
-
-  const handleAddToCart = () => {
-    if (quantity <= 0) return;
-    dispatchCartState({
-      type: 'ADD_TO_CART',
-      payload: {
-        product: {
-          id: productDetails.id,
-          product_name_cn,
-          product_name_en,
-          price: product_price,
-          imgUrl: product_img.data[0].attributes.formats.medium.url,
-        },
-        quantity,
-      },
-    });
-    setQuantity(0);
-  };
-
   return (
     <>
       <Head>
@@ -99,29 +110,31 @@ const ProductDetail: NextPage<
           images={product_img.data.map((img) => {
             return {
               title: i18n.language === 'en' ? product_name_en : product_name_cn,
-              medium: img.attributes.formats.medium,
-              thumbnail: img.attributes.formats.thumbnail,
+              medium:
+                img.attributes!.formats.medium ||
+                img.attributes!.formats.thumbnail,
+              thumbnail: img.attributes!.formats.thumbnail,
             };
           })}
         />
         {/* product details */}
         <div className="pt-4 px-container-px mb-10">
           <div className="flex gap-3 mb-2">
-            {product_categories.data.map((category) => {
+            {product_categories!.data.map((category) => {
               return (
                 <span
                   key={
                     i18n.language === 'en'
-                      ? category.attributes.category_name_en
-                      : category.attributes.category_name
+                      ? category.attributes!.category_name_en
+                      : category.attributes!.category_name
                   }
                   className="px-1 bg-platinum rounded-sm shadow-sm"
                 >
                   <Typography variant="InlineText" color="dark-blue">
                     #
                     {i18n.language === 'en'
-                      ? category.attributes.category_name_en
-                      : category.attributes.category_name}
+                      ? category.attributes!.category_name_en
+                      : category.attributes!.category_name}
                   </Typography>
                 </span>
               );
