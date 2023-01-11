@@ -159,13 +159,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </div>
         </Section>
 
-        <div className="rounded-2xl shadow-sm relative overflow-hidden">
-          <div
-            className="absolute left-0 h-full w-full top-1/4"
-            style={{
-              backgroundImage: `url(${memphizBg.src})`,
-            }}
-          ></div>
+        <div className="rounded-2xl shadow-sm">
           {/* popular products */}
           {sortedFeaturedCategoriesProducts &&
             sortedFeaturedCategoriesProducts.map((category) => {
@@ -178,8 +172,16 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                       ? category.attributes.category_name_en
                       : category.attributes.category_name
                   }
-                  className="relative px-container-px"
+                  className="relative px-container-px overflow-hidden"
                 >
+                  {/* pattern background div */}
+                  <div
+                    className="absolute left-0 h-full w-full top-1/4 -z-10"
+                    style={{
+                      backgroundImage: `url(${memphizBg.src})`,
+                    }}
+                  ></div>
+                  {/* pattern background div ends */}
                   <div className="grid grid-cols-2 gap-4">
                     {category &&
                       category.attributes &&
