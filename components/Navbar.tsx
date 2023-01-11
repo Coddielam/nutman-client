@@ -115,8 +115,8 @@ const Navbar: React.FC = () => {
                 >
                   <a className="py-3">
                     {i18n.language === 'en'
-                      ? category.attributes.category_name_en
-                      : category.attributes.category_name}
+                      ? category.attributes!.category_name_en
+                      : category.attributes!.category_name}
                   </a>
                 </Link>
               );
