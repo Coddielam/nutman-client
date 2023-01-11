@@ -21,13 +21,12 @@ import {
   queryProductCategories,
   queryFeaturedStackedCategories,
 } from '@root/utils/strapiQueries';
+import memphizBg from '@root/public/images/memPat1.svg';
 
 export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
   const promoSlides = await queryPromoSlides();
   const featuredCategorizedProducts = await queryFeaturedStackedCategories();
   const productCategories = await queryProductCategories();
-
-  console.log('featured:', featuredCategorizedProducts);
 
   return {
     props: {
@@ -104,7 +103,12 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       </Head>
 
       <main>
-        <div className="bg-platinum px-container-px">
+        <div
+          className="px-container-px"
+          style={{
+            backgroundImage: `url(${memphizBg.src})`,
+          }}
+        >
           <Swiper
             modules={[Autoplay, Pagination]}
             autoplay={{
@@ -155,13 +159,13 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </div>
         </Section>
 
-        <div
-          className="rounded-2xl shadow-sm"
-          style={{
-            backgroundImage:
-              'linear-gradient(to bottom, white 0px, white 250px, white 250px, #ecece9 150px, #ecece9 150px)',
-          }}
-        >
+        <div className="rounded-2xl shadow-sm relative overflow-hidden">
+          <div
+            className="absolute left-0 h-full w-full top-1/4"
+            style={{
+              backgroundImage: `url(${memphizBg.src})`,
+            }}
+          ></div>
           {/* popular products */}
           {sortedFeaturedCategoriesProducts &&
             sortedFeaturedCategoriesProducts.map((category) => {
