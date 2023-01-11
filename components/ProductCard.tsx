@@ -64,7 +64,7 @@ const ProductCard: React.FC<IProductCardProps> = ({
   };
 
   return (
-    <div className="rounded-lg pb-2 shadow-md max-w-[212.5px] overflow-clip bg-white">
+    <div className="rounded-lg pb-2 shadow-md max-w-[212.5px] overflow-clip bg-white h-full grid content-between">
       <div className="w-full h-[212.5px] relative mb-2 overflow-clip">
         <Link href={`/product/${productId}`} passHref>
           <a className="relative block h-full w-full">
@@ -108,11 +108,11 @@ const ProductCard: React.FC<IProductCardProps> = ({
 
           <button
             onClick={handleAddToCartOnClick}
-            className="flex p-2 rounded-md items-center shadow-sm bg-orange bg-opacity-90"
+            className="flex p-2 rounded-md items-center shadow-sm bg-main bg-opacity-90"
           >
-            <Typography variant="Paragraph" bold>
+            <Typography variant="Paragraph" bold color="white">
               {t('addToCart')}
-              <CgShoppingCart className="inline-block ml-2" />
+              <CgShoppingCart className="inline-block ml-2" color="#00000" />
             </Typography>
           </button>
         </div>

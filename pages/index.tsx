@@ -27,6 +27,8 @@ export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
   const featuredCategorizedProducts = await queryFeaturedStackedCategories();
   const productCategories = await queryProductCategories();
 
+  console.log('featured:', featuredCategorizedProducts);
+
   return {
     props: {
       ...(await serverSideTranslations(locale!, ['common'])),
@@ -130,7 +132,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                     passHref
                   >
                     <a>
-                      <ModularBox className="flex flex-col justify-center items-center gap-3 bg-orange">
+                      <ModularBox className="flex flex-col justify-center items-center gap-3 bg-main">
                         <Image
                           src={
                             category.attributes.category_icon.data?.attributes
@@ -196,8 +198,8 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                       })}
                   </div>
                   <Link href={`/category/${category.id}`} passHref>
-                    <a className="bg-orange w-fit px-4 py-2 rounded-md shadow-md block mx-auto mt-8 mb-2 bg-opacity-90">
-                      <Typography variant="InlineText" bold>
+                    <a className="bg-main w-fit px-4 py-2 rounded-md shadow-md block mx-auto mt-8 mb-2 bg-opacity-90">
+                      <Typography variant="InlineText" bold color="white">
                         {`${t('morePopularProducts').slice(
                           0,
                           i18n.language === 'en' ? 4 : 2

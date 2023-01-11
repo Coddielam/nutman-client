@@ -166,7 +166,7 @@ const ProductDetail: NextPage<
             <QuantityInput />
           </div>
           <button
-            className="ml-auto bg-orange shadow-sm rounded-sm px-2 py-1 shadow-platinum opacity-100"
+            className="ml-auto bg-main shadow-sm rounded-sm px-2 py-1 shadow-platinum opacity-100"
             onClick={handleAddToCart}
           >
             <Typography variant="InlineText" bold color="white">

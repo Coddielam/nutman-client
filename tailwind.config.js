@@ -30,6 +30,7 @@ module.exports = {
       colors: {
         red: '#f94449',
         purple: '#7600bc',
+        main: '#ff4c4c',
       },
     },
   },

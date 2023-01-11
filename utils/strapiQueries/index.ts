@@ -234,16 +234,13 @@ export const queryAllProductIds = async () => {
 // query featured categories
 const featuredCategoryQuery = graphql(`
   query FeatureStacks {
-    productCategories(
-      filters: { feature_stack: { gt: 0 } }
-      pagination: { start: 0, limit: 2 }
-    ) {
+    productCategories(filters: { feature_stack: { gt: 0 } }) {
       data {
         id
         attributes {
           category_name
           category_name_en
-          products {
+          products(pagination: { limit: 4 }) {
             data {
               id
               attributes {
