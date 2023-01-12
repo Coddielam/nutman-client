@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Typography from '@components/Typography';
 import { useQuantityInput } from '@root/hooks/useQuantityInput';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
 const CartItemInfo: React.FC<{
   product_id: string;
@@ -50,14 +51,15 @@ const CartItemInfo: React.FC<{
   }, [cartState, product_id]);
 
   return (
-    <div className="flex h-[180px] w-full rounded-sm overflow-clip py-3">
-      <div className="w-1/3 h-full relative overflow-clip rounded-md">
+    <div className="flex w-full rounded-sm py-3 h-fit">
+      <div className="w-1/3 h-[180px] relative overflow-clip rounded-md">
         <Image
           src={imgUrl}
           objectFit="cover"
           layout="fill"
           alt={i18n.language === 'en' ? product_name_en : product_name_cn}
           objectPosition="top"
+          height="180"
         />
       </div>
       <div className="py-2 px-4">
@@ -68,14 +70,16 @@ const CartItemInfo: React.FC<{
           ${price.toLocaleString()} ({t('itemTotal')} ${inputQuantity * price})
         </Typography>
         <QuantityInput />
-        {inputQuantity !== originalQuantity && (
-          <button
-            className="px-2 py-1 shadow-sm rounded-sm bg-yellow"
-            onClick={updateQuantityInCart}
-          >
-            <Typography variant="InlineText">{t('updateQuantity')}</Typography>
-          </button>
-        )}
+
+        <button
+          className={cn('px-2 py-1 shadow-sm rounded-sm bg-yellow', {
+            'opacity-0': inputQuantity === originalQuantity,
+          })}
+          // className="px-2 py-1 shadow-sm rounded-sm bg-yellow"
+          onClick={updateQuantityInCart}
+        >
+          <Typography variant="InlineText">{t('updateQuantity')}</Typography>
+        </button>
       </div>
     </div>
   );
