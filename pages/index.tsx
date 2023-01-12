@@ -192,7 +192,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                     passHref
                     className="z-10"
                   >
-                    <a className="bg-main w-fit px-4 py-2 rounded-md shadow-md block mx-auto mt-8 mb-2 bg-opacity-90 relative z-50">
+                    <a className="bg-main w-fit px-4 py-2 rounded-md shadow-md block mx-auto mt-8 mb-2 bg-opacity-90 relative z-10">
                       <Typography variant="InlineText" bold color="white">
                         {`${t('morePopularProducts').slice(
                           0,
