@@ -47,8 +47,6 @@ export const getStaticProps = async (
 ) => {
   const productDetail = await queryProductById(Number(context.params!.id));
 
-  console.log('productDetail:', productDetail);
-
   return {
     props: {
       ...(await serverSideTranslations(context.locale!, ['common'])),
@@ -119,7 +117,7 @@ const ProductDetail: NextPage<
         />
         {/* product details */}
         <div className="pt-4 px-container-px mb-10">
-          <div className="flex gap-3 mb-2">
+          <div className="flex gap-3 mb-2 flex-wrap">
             {product_categories!.data.map((category) => {
               return (
                 <span
@@ -150,10 +148,11 @@ const ProductDetail: NextPage<
 
           <div className="border-y-[lightgray] border-y-[1px]">
             <Accordion title={t('product.id.productDescription')} defaultOpen>
-              <div className="px-3 prose">
-                {(i18n.language === 'en' ? product_desc_en : product_desc_cn) ||
-                  '-'}
-              </div>
+              <pre className="px-3 prose whitespace-prewrap">
+                {i18n.language === 'en'
+                  ? product_desc_en
+                  : product_desc_cn || '-'}
+              </pre>
             </Accordion>
           </div>
         </div>

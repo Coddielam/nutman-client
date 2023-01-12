@@ -65,7 +65,7 @@ const ImageGallery: React.FC<Pick<IImageGallery, 'images'>> = ({ images }) => {
         }}
         className="w-full h-[250px] overflow-visible"
         swiperSlideProps={{
-          className: 'rounded-none bg-platinum',
+          className: 'rounded-none bg-memphisPattern',
         }}
         slides={images.map((img, index) => {
           return {

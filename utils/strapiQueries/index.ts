@@ -77,7 +77,7 @@ export const queryPromoSlides = async () => {
 // query product categories list
 const productCategoriesQuery = graphql(`
   query Categories {
-    productCategories {
+    productCategories(sort: "feature_stack:desc") {
       data {
         id
         attributes {
@@ -149,7 +149,7 @@ export const queryCategoryProductsById = async (categoryId: number) => {
 // query all product categories' names and ids
 const allProductCategoriesIdsNames = graphql(`
   query ProductCategories {
-    productCategories {
+    productCategories(sort: "feature_stack:desc") {
       data {
         id
         attributes {
@@ -234,7 +234,10 @@ export const queryAllProductIds = async () => {
 // query featured categories
 const featuredCategoryQuery = graphql(`
   query FeatureStacks {
-    productCategories(filters: { feature_stack: { gt: 0 } }) {
+    productCategories(
+      filters: { feature_stack: { gt: 0 } }
+      sort: "feature_stack:desc"
+    ) {
       data {
         id
         attributes {

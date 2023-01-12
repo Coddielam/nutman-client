@@ -32,7 +32,7 @@ const Typography: React.FC<ITypographyProps | ITypographyNonTitleProps> = ({
   color,
   children,
 }) => {
-  let baseStyle = ['prose', 'prose-gray', 'font-sans'];
+  let baseStyle = ['prose', 'prose-gray', 'font-notoSansTC'];
   if (bold) baseStyle.push('font-semibold');
   if (color) {
     baseStyle.splice(0, 2);

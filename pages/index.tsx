@@ -3,7 +3,6 @@ import type {
   InferGetStaticPropsType,
   NextPage,
 } from 'next';
-import Head from 'next/head';
 import Swiper from '@components/Swiper';
 import { Autoplay, Pagination } from 'swiper';
 import Section from '@components/Section';
@@ -22,6 +21,7 @@ import {
   queryFeaturedStackedCategories,
 } from '@root/utils/strapiQueries';
 import memphizBg from '@root/public/images/memPat1.svg';
+import Head from 'next/head';
 
 export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
   const promoSlides = await queryPromoSlides();
@@ -84,16 +84,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       .sort((slideA, slideB) => slideA.order! - slideB.order!);
   }, [promoSlides]);
 
-  const sortedFeaturedCategoriesProducts = useMemo(() => {
-    if (!featuredCategoriesProducts) return [];
-    return [...featuredCategoriesProducts].sort((categoryA, categoryB) => {
-      return (
-        categoryB.attributes!.feature_stack -
-        categoryA.attributes!.feature_stack
-      );
-    });
-  }, [featuredCategoriesProducts]);
-
   return (
     <>
       <Head>
@@ -101,14 +91,8 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <meta name="description" content={generalT('meta.description')} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main>
-        <div
-          className="px-container-px"
-          style={{
-            backgroundImage: `url(${memphizBg.src})`,
-          }}
-        >
+        <div className="px-container-px bg-memphisPattern">
           <Swiper
             modules={[Autoplay, Pagination]}
             autoplay={{
@@ -161,8 +145,8 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
         <div className="rounded-2xl shadow-sm">
           {/* popular products */}
-          {sortedFeaturedCategoriesProducts &&
-            sortedFeaturedCategoriesProducts.map((category) => {
+          {featuredCategoriesProducts &&
+            featuredCategoriesProducts.map((category) => {
               if (!category.attributes) return <></>;
               return (
                 <Section
@@ -175,12 +159,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                   className="relative px-container-px overflow-hidden"
                 >
                   {/* pattern background div */}
-                  <div
-                    className="absolute left-0 h-full w-full top-1/4 -z-10"
-                    style={{
-                      backgroundImage: `url(${memphizBg.src})`,
-                    }}
-                  ></div>
+                  <div className="absolute top-1/4 left-0 h-full w-full bg-memphisPattern"></div>
                   {/* pattern background div ends */}
                   <div className="grid grid-cols-2 gap-4">
                     {category &&
@@ -189,22 +168,31 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                       category.attributes.products.data.map((product) => {
                         if (!product.attributes) return <></>;
                         return (
-                          <ProductCard
-                            productId={product.id!}
-                            imgUrl={
-                              product.attributes.product_img.data[0].attributes
-                                ?.url
-                            }
-                            key={product.id}
-                            product_name_en={product.attributes.product_name_en}
-                            product_name_cn={product.attributes.product_name_cn}
-                            price={product.attributes.product_price}
-                          />
+                          <div className="z-10" key={product.id}>
+                            <ProductCard
+                              productId={product.id!}
+                              imgUrl={
+                                product.attributes.product_img.data[0]
+                                  .attributes?.url
+                              }
+                              product_name_en={
+                                product.attributes.product_name_en
+                              }
+                              product_name_cn={
+                                product.attributes.product_name_cn
+                              }
+                              price={product.attributes.product_price}
+                            />
+                          </div>
                         );
                       })}
                   </div>
-                  <Link href={`/category/${category.id}`} passHref>
-                    <a className="bg-main w-fit px-4 py-2 rounded-md shadow-md block mx-auto mt-8 mb-2 bg-opacity-90">
+                  <Link
+                    href={`/category/${category.id}`}
+                    passHref
+                    className="z-10"
+                  >
+                    <a className="bg-main w-fit px-4 py-2 rounded-md shadow-md block mx-auto mt-8 mb-2 bg-opacity-90 relative z-50">
                       <Typography variant="InlineText" bold color="white">
                         {`${t('morePopularProducts').slice(
                           0,

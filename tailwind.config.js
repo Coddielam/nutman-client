@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -23,6 +24,12 @@ module.exports = {
       purple: '#8F00FF',
     },
     extend: {
+      backgroundImage: {
+        memphisPattern: "url('/images/memPat1.svg')",
+      },
+      fontFamily: {
+        notoSansTC: '"Noto Sans TC", sans-serif',
+      },
       spacing: {
         navbar: 'var(--navbar-height)',
         'container-px': 'var(--container-px)',
@@ -31,6 +38,7 @@ module.exports = {
         red: '#f94449',
         purple: '#7600bc',
         main: '#ff4c4c',
+        offwhite: '#fff',
       },
     },
   },

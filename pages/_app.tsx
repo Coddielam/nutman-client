@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           gtag('config', 'G-P19MQG0QTE');`}
       </Script>
 
-      <div className="max-w-md mx-auto h-vh relative transition-all duration-200">
+      <div className="max-w-md mx-auto h-vh relative transition-all duration-200 bg-offwhite">
         <CartContextWrapper>
           <Navbar />
           <Component {...pageProps} />
