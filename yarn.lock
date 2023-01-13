@@ -1108,11 +1108,6 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@juggle/resize-observer@^3.3.1":
-  version "3.4.0"
-  resolved "https://registry.npmjs.org/@juggle/resize-observer/-/resize-observer-3.4.0.tgz"
-  integrity sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==
-
 "@motionone/animation@^10.15.1":
   version "10.15.1"
   resolved "https://registry.npmjs.org/@motionone/animation/-/animation-10.15.1.tgz"
@@ -2682,11 +2677,6 @@ event-target-shim@^5.0.0:
   resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
-eventemitter3@^3.1.0:
-  version "3.1.2"
-  resolved "https://registry.npmjs.org/eventemitter3/-/eventemitter3-3.1.2.tgz"
-  integrity sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==
-
 execa@^6.1.0:
   version "6.1.0"
   resolved "https://registry.npmjs.org/execa/-/execa-6.1.0.tgz"
@@ -2839,11 +2829,6 @@ follow-redirects@^1.14.9:
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.2.tgz"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
 
-fontfaceobserver@^2.1.0:
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/fontfaceobserver/-/fontfaceobserver-2.3.0.tgz"
-  integrity sha512-6FPvD/IVyT4ZlNe7Wcn5Fb/4ChigpucKYSvD6a+0iMoLn2inpo711eyIcKjmDtE5XNcgAkSH9uN/nfAeZzHEfg==
-
 for-each@^0.3.3:
   version "0.3.3"
   resolved "https://registry.npmjs.org/for-each/-/for-each-0.3.3.tgz"
@@ -2887,7 +2872,7 @@ fraction.js@^4.2.0:
   resolved "https://registry.npmjs.org/fraction.js/-/fraction.js-4.2.0.tgz"
   integrity sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==
 
-framer-motion@^6.3.1, framer-motion@^8.4.2:
+framer-motion@^8.4.2:
   version "8.4.2"
   resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-8.4.2.tgz"
   integrity sha512-AdYwbEZZ+6Z748A8JdNtwH7YR24HvXr/hJHL06ofipMyRchrf7Mzvk69zM24+rAm3SC3DCJK0WdbhpOLzroO+w==
@@ -2897,17 +2882,6 @@ framer-motion@^6.3.1, framer-motion@^8.4.2:
     tslib "^2.4.0"
   optionalDependencies:
     "@emotion/is-prop-valid" "^0.8.2"
-
-framer@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.npmjs.org/framer/-/framer-2.2.1.tgz"
-  integrity sha512-X8adaBg2ARufBUlNPXyICjco2lYNTfHUXc8Nx1N3/KZUCKlulgS0GkZjXH9rOJ4f9XcNwSVzXN9t1GNqTY9JDQ==
-  dependencies:
-    "@juggle/resize-observer" "^3.3.1"
-    eventemitter3 "^3.1.0"
-    fontfaceobserver "^2.1.0"
-    hoist-non-react-statics "^3.3.2"
-    hsluv "^0.0.3"
 
 fs-constants@^1.0.0:
   version "1.0.0"
@@ -3180,11 +3154,6 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
   dependencies:
     react-is "^16.7.0"
-
-hsluv@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmjs.org/hsluv/-/hsluv-0.0.3.tgz"
-  integrity sha512-08iL2VyCRbkQKBySkSh6m8zMUa3sADAxGVWs3Z1aPcUkTJeK0ETG4Fc27tEmQBGUAXZjIsXOZqBvacuVNSC/fQ==
 
 html-parse-stringify@^3.0.1:
   version "3.0.1"
