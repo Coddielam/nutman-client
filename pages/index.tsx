@@ -155,7 +155,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <div className="rounded-2xl shadow-sm">
           {/* popular products */}
           {featuredCategoriesProducts &&
-            featuredCategoriesProducts.map((category) => {
+            featuredCategoriesProducts.map((category, index) => {
               if (!category.attributes) return <></>;
               return (
                 <div key={category.id}>
@@ -172,6 +172,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                     <div className="absolute top-1/4 left-0 h-full w-full bg-memphisPattern"></div>
                     {/* featured products */}
                     <VariantsContainer
+                      visibleOn={index === 0 ? 'onmount' : 'inview'}
                       className="grid grid-cols-2 gap-4"
                       viewport={{
                         once: true,
