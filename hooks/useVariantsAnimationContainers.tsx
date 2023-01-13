@@ -34,12 +34,22 @@ export const useVariantsAnimationContainers = (
     once?: boolean;
   } = { visible: 'whileInView' }
 ) => {
-  const Container = ({ children, ...otherProps }: HTMLMotionProps<'div'>) => {
+  const Container = ({
+    children,
+    visibleOn,
+    ...otherProps
+  }: HTMLMotionProps<'div'> & { visibleOn?: 'inview' | 'onmount' }) => {
     return (
       <motion.div
         variants={sectionVariants}
-        initial="hidden"
-        {...{ [visible]: 'visible' }}
+        initial={visibleOn === 'onmount' ? undefined : 'hidden'}
+        {...{
+          [visibleOn
+            ? visibleOn === 'onmount'
+              ? 'animate'
+              : 'whileInView'
+            : visible]: 'visible',
+        }}
         {...otherProps}
       >
         {children}
