@@ -5,6 +5,7 @@ import CartContextWrapper from '@root/context/cart';
 import Footer from '@components/Footer';
 import { appWithTranslation } from 'next-i18next';
 import Script from 'next/script';
+import { PageWrapper } from '@components/page/PageWrapper';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,13 +22,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           gtag('config', 'G-P19MQG0QTE');`}
       </Script>
 
-      <div className="max-w-md mx-auto h-vh relative transition-all duration-200 bg-offwhite">
-        <CartContextWrapper>
-          <Navbar />
-          <Component {...pageProps} />
-        </CartContextWrapper>
-        <Footer />
-      </div>
+      <PageWrapper>
+        <div className="max-w-md mx-auto h-vh relative transition-all duration-200 bg-offwhite">
+          <CartContextWrapper>
+            <Navbar />
+            <Component {...pageProps} />
+          </CartContextWrapper>
+          <Footer />
+        </div>
+      </PageWrapper>
     </>
   );
 }

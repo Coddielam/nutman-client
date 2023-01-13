@@ -14,6 +14,8 @@ import { useRouter } from 'next/router';
 import SocialMediaPlug from './SocialMediaPlug';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@components/atoms/Button';
+import { motion } from 'framer-motion';
 
 const Navbar: React.FC = () => {
   const { i18n } = useTranslation();
@@ -55,12 +57,12 @@ const Navbar: React.FC = () => {
     <>
       <nav className="sticky top-0 flex justify-between align-middle w-full px-4 py-2 h-navbar shadow-sm z-50 bg-white">
         <div className="flex gap-2">
-          <button
+          <Button
             aria-label="Open navigation panel"
             onClick={() => setShowMenu(true)}
           >
             <CgMenuRight />
-          </button>
+          </Button>
           <Link href="/">
             <a className="h-[110%] w-20 relative">
               <Image
@@ -78,9 +80,22 @@ const Navbar: React.FC = () => {
         <Link href="/checkout" passHref>
           <a className="flex">
             <CgShoppingCart className="" />
-            <span className="bg-blue text-white shadow-sm rounded-full text-xs top-1 relative -left-1 h-4 w-4 flex items-center justify-center">
+            <motion.span
+              key={cartState.length}
+              variants={{
+                initial: {
+                  scale: 0,
+                },
+                show: {
+                  scale: 1,
+                },
+              }}
+              initial="initial"
+              animate="show"
+              className="bg-blue text-white shadow-sm rounded-full text-xs top-1 relative -left-1 h-4 w-4 flex items-center justify-center"
+            >
               {cartState.length}
-            </span>
+            </motion.span>
           </a>
         </Link>
       </nav>
@@ -97,13 +112,13 @@ const Navbar: React.FC = () => {
           }
         )}
       >
-        <button
+        <Button
           onClick={() => {
             setShowMenu(false);
           }}
         >
           <CgChevronDoubleLeft className="w-5 h-5 fill-platinum" />
-        </button>
+        </Button>
         <ExpandPanel title={t('categories')}>
           <div className="flex flex-col divide-y-[1px] divide-platinum">
             {categories.map((category) => {
@@ -128,13 +143,15 @@ const Navbar: React.FC = () => {
           <SocialMediaPlug />
         </div>
         <div className="py-3">
-          <button
+          <Button
             onClick={onToggleLanguage}
             className="flex gap-2 items-center"
           >
-            {baseT('locale.' + newLocale)}
-            <IoLanguageSharp className="h-5 w-5" />
-          </button>
+            <>
+              {baseT('locale.' + newLocale)}
+              <IoLanguageSharp className="h-5 w-5" />
+            </>
+          </Button>
         </div>
       </div>
     </>

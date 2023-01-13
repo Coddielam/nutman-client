@@ -7,6 +7,7 @@ import {
 import Typography from './Typography';
 import { CgSpinner } from 'react-icons/cg';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@components/atoms/Button';
 
 const siteURL = process.env.NEXT_PUBLIC_SITE_URL!;
 
@@ -87,7 +88,7 @@ const PaymentElementsForm: React.FC = () => {
         {/* Stripe Payment */}
         <PaymentElement className="pt-5 py-3" />
 
-        <button
+        <Button
           className="bg-blue px-4 py-2 rounded-sm shadow-sm flex justify-center h-10"
           disabled={!stripe || !elements}
         >
@@ -98,7 +99,7 @@ const PaymentElementsForm: React.FC = () => {
               {t('submitOrder')}
             </Typography>
           )}
-        </button>
+        </Button>
 
         {message && (
           <Typography variant="Paragraph" color="red">

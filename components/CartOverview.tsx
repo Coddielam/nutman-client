@@ -5,6 +5,7 @@ import Typography from '@components/Typography';
 import { useQuantityInput } from '@root/hooks/useQuantityInput';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { Button } from '@components/atoms/Button';
 
 const CartItemInfo: React.FC<{
   product_id: string;
@@ -71,7 +72,7 @@ const CartItemInfo: React.FC<{
         </Typography>
         <QuantityInput />
 
-        <button
+        <Button
           className={cn('px-2 py-1 shadow-sm rounded-sm bg-yellow', {
             'opacity-0': inputQuantity === originalQuantity,
           })}
@@ -79,7 +80,7 @@ const CartItemInfo: React.FC<{
           onClick={updateQuantityInCart}
         >
           <Typography variant="InlineText">{t('updateQuantity')}</Typography>
-        </button>
+        </Button>
       </div>
     </div>
   );

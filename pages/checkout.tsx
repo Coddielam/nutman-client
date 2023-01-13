@@ -15,6 +15,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 import { DELIVERY } from '@root/config/constants';
 import Head from 'next/head';
+import { PageWrapper } from '@components/page/PageWrapper';
+import { Button } from '@components/atoms/Button';
 
 const CheckoutPage: NextPage = () => {
   const { t, i18n } = useTranslation('common', { keyPrefix: 'checkout' });
@@ -182,7 +184,7 @@ const CheckoutPage: NextPage = () => {
   // if there's nothing in the cart, return here
   if (cartTotalPrice <= 0) {
     return (
-      <>
+      <PageWrapper>
         <Head>
           <title>{t('head.title')}</title>
         </Head>
@@ -198,12 +200,12 @@ const CheckoutPage: NextPage = () => {
             </Link>
           </div>
         </main>
-      </>
+      </PageWrapper>
     );
   }
 
   return (
-    <>
+    <PageWrapper>
       <Head>
         <title>{t('head.title')}</title>
       </Head>
@@ -432,12 +434,12 @@ const CheckoutPage: NextPage = () => {
           {contactInfo.hasError && (
             <p className="text-red text-sm">{t('errorMsg')}</p>
           )}
-          <button
+          <Button
             onClick={confirmedContactInfo ? handleEdit : handleConfirm}
             className="bg-blue px-4 py-2 my-3 rounded-md mx-auto text-white shadow-sm disabled:bg-platinum"
           >
             {confirmedContactInfo ? t('edit') : t('confirm')}
-          </button>
+          </Button>
         </div>
 
         {/* stripe payment elements context provider */}
@@ -461,7 +463,7 @@ const CheckoutPage: NextPage = () => {
             )}
         </div>
       </main>
-    </>
+    </PageWrapper>
   );
 };
 

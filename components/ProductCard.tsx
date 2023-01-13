@@ -6,6 +6,7 @@ import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { CartContext } from '@root/context/cart';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@components/atoms/Button';
 
 interface IProductCardProps {
   productId: string;
@@ -87,11 +88,12 @@ const ProductCard: React.FC<IProductCardProps> = ({
             ${price.toLocaleString()}
           </Typography>
           <div className="flex items-center w-full py-2">
-            <AiFillMinusCircle
-              role="button"
+            <Button
+              variants={{ whileTab: { scale: 0.5 } }}
               onClick={() => handleAddMinsuOne('MINUS')}
-              className="w-5 h-5 shadow-sm rounded-full"
-            />
+            >
+              <AiFillMinusCircle className="w-5 h-5 shadow-sm rounded-full" />
+            </Button>
             <input
               ref={inputRef}
               type="text"
@@ -99,14 +101,15 @@ const ProductCard: React.FC<IProductCardProps> = ({
               inputMode="numeric"
               className="w-8 h-8 mx-2 shadow-sm border border-[lightgray] text-center"
             />
-            <AiFillPlusCircle
-              role="button"
+            <Button
+              variants={{ whileTab: { scale: 0.5 } }}
               onClick={() => handleAddMinsuOne('ADD')}
-              className="w-5 h-5 shadow-sm rounded-full"
-            />
+            >
+              <AiFillPlusCircle className="w-5 h-5 shadow-sm rounded-full" />
+            </Button>
           </div>
 
-          <button
+          <Button
             onClick={handleAddToCartOnClick}
             className="flex p-2 rounded-md items-center shadow-sm bg-main bg-opacity-90"
           >
@@ -114,7 +117,7 @@ const ProductCard: React.FC<IProductCardProps> = ({
               {t('addToCart')}
               <CgShoppingCart className="inline-block ml-2" color="#00000" />
             </Typography>
-          </button>
+          </Button>
         </div>
       </div>
     </div>
