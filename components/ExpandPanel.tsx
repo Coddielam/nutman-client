@@ -22,7 +22,7 @@ const Accordion: React.FC<IAccordionProps> = ({
         {isExpanded ? <BsChevronUp /> : <BsChevronDown />}
       </div>
       <div
-        className={`overflow-hidden transition-all duration-500 ${
+        className={`overflow-scroll transition-all duration-500 ${
           isExpanded ? 'max-h-96 ease-in' : 'max-h-0 ease-out'
         }`}
       >

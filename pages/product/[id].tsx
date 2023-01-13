@@ -17,6 +17,8 @@ import {
   queryAllProductIds,
   queryProductById,
 } from '@root/utils/strapiQueries';
+import { PageWrapper } from '@components/page/PageWrapper';
+import { Button } from '@components/atoms/Button';
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const products = await queryAllProductIds();
@@ -99,7 +101,7 @@ const ProductDetail: NextPage<
   } = productDetails.attributes;
 
   return (
-    <>
+    <PageWrapper>
       <Head>
         <title>{t('product.head.title')}</title>
       </Head>
@@ -164,17 +166,17 @@ const ProductDetail: NextPage<
           <div>
             <QuantityInput />
           </div>
-          <button
+          <Button
             className="ml-auto bg-main shadow-sm rounded-sm px-2 py-1 shadow-platinum opacity-100"
             onClick={handleAddToCart}
           >
             <Typography variant="InlineText" bold color="white">
               {t('product.id.confirm')}
             </Typography>
-          </button>
+          </Button>
         </div>
       </main>
-    </>
+    </PageWrapper>
   );
 };
 

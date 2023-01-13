@@ -1,3 +1,4 @@
+import { PageWrapper } from '@components/page/PageWrapper';
 import Typography from '@components/Typography';
 import { PaymentIntent } from '@stripe/stripe-js';
 import axios from 'axios';
@@ -51,7 +52,7 @@ const PaymentSuccess: NextPage = () => {
   }
 
   return (
-    <>
+    <PageWrapper>
       <Head>
         <title>{t('head.title')}</title>
       </Head>
@@ -92,7 +93,7 @@ const PaymentSuccess: NextPage = () => {
           </Link>
         </div>
       </main>
-    </>
+    </PageWrapper>
   );
 };
 

@@ -1,3 +1,4 @@
+import { PageWrapper } from '@components/page/PageWrapper';
 import Typography from '@components/Typography';
 import { GetStaticProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -5,6 +6,14 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { HTMLAttributes, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale!, ['common'])),
+    },
+  };
+};
 
 const Figure: React.FC<PropsWithChildren<HTMLAttributes<HTMLSpanElement>>> = ({
   children,
@@ -24,7 +33,7 @@ const Figure: React.FC<PropsWithChildren<HTMLAttributes<HTMLSpanElement>>> = ({
 const Custom404: NextPage = () => {
   const { t } = useTranslation('common', { keyPrefix: '404' });
   return (
-    <>
+    <PageWrapper>
       <Head>
         <title>{t('head.title')}</title>
       </Head>
@@ -41,15 +50,7 @@ const Custom404: NextPage = () => {
           </Link>
         </div>
       </main>
-    </>
+    </PageWrapper>
   );
 };
 export default Custom404;
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale!, ['common'])),
-    },
-  };
-};

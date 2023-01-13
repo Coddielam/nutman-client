@@ -14,6 +14,8 @@ import {
   queryAllProductCategoriesIdsNames,
   queryCategoryProductsById,
 } from '@root/utils/strapiQueries';
+import { PageWrapper } from '@components/page/PageWrapper';
+import { useVariantsAnimationContainers } from '@root/hooks/useVariantsAnimationContainers';
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const res = await queryAllProductCategoriesIdsNames();
@@ -64,8 +66,11 @@ const CategoryProductsPage: NextPage<
   const { i18n } = useTranslation();
   const router = useRouter();
 
+  const [ProductCardsContainer, ProductCardContainer] =
+    useVariantsAnimationContainers({ visible: 'animate' });
+
   return (
-    <>
+    <PageWrapper>
       <Head>
         <title>{t('head.title')}</title>
       </Head>
@@ -92,29 +97,29 @@ const CategoryProductsPage: NextPage<
           )}
         </div>
         {/* products in the category */}
-        <div className="grid grid-cols-2 gap-4 px-container-px">
+        <ProductCardsContainer
+          className="grid grid-cols-2 gap-4 px-container-px"
+          viewport={{ once: false }}
+        >
           {productCategory?.attributes?.products &&
             productCategory.attributes.products.data.map((product) => {
               return (
-                <ProductCard
-                  key={
-                    i18n.language === 'en'
-                      ? product.attributes!.product_name_en
-                      : product.attributes!.product_name_cn
-                  }
-                  productId={product.id!}
-                  product_name_en={product.attributes!.product_name_en}
-                  product_name_cn={product.attributes!.product_name_cn}
-                  price={product.attributes!.product_price}
-                  imgUrl={
-                    product.attributes!.product_img.data[0].attributes?.url
-                  }
-                />
+                <ProductCardContainer key={product.id}>
+                  <ProductCard
+                    productId={product.id!}
+                    product_name_en={product.attributes!.product_name_en}
+                    product_name_cn={product.attributes!.product_name_cn}
+                    price={product.attributes!.product_price}
+                    imgUrl={
+                      product.attributes!.product_img.data[0].attributes?.url
+                    }
+                  />
+                </ProductCardContainer>
               );
             })}
-        </div>
+        </ProductCardsContainer>
       </main>
-    </>
+    </PageWrapper>
   );
 };
 
