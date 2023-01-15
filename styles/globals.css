@@ -4,6 +4,7 @@
 
 :root {
   --navbar-height: 40px;
+  --navbar-with-back-height: 77px;
   --container-px: 0.75rem;
 }
 
@@ -21,5 +22,6 @@ body {
 @layer base {
   pre {
     @apply font-notoSansTC;
+    white-space: break-spaces;
   }
 }

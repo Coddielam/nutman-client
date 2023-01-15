@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 import PaymentFlowIllu from '@components/PaymentFlowIllu';
-import Image from 'next/image';
+import { Image } from '@components/atoms/Image';
 import React, { useMemo } from 'react';
 import {
   queryPromoSlides,

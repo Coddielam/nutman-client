@@ -75,7 +75,7 @@ const CategoryProductsPage: NextPage<
         <title>{t('head.title')}</title>
       </Head>
       <main>
-        <div className="border-b-[lightgray] border-b-[1px] pt-4 py-2 mb-4 sticky top-navbar z-20 bg-white opacity-95 px-container-px flex items-center gap-3 prose prose-lg prose-headings:h1 font-semibold">
+        <div className="sticky top-navbar-with-back border-b-[lightgray] border-b-[1px] pt-4 py-2 mb-4 z-20 bg-white opacity-95 px-container-px flex items-center gap-3 prose prose-lg prose-headings:h1 font-semibold">
           {/* product category selection dropdown filter */}
           {productCategory && productCategories && (
             <select

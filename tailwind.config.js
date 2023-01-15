@@ -32,6 +32,7 @@ module.exports = {
       },
       spacing: {
         navbar: 'var(--navbar-height)',
+        'navbar-with-back': 'var(--navbar-with-back-height)',
         'container-px': 'var(--container-px)',
       },
       colors: {

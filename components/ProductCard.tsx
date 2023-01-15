@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import Typography from './Typography';
 import { CgShoppingCart } from 'react-icons/cg';
-import Image from 'next/image';
+import { Image } from '@components/atoms/Image';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { CartContext } from '@root/context/cart';
 import Link from 'next/link';

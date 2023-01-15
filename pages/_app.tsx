@@ -6,8 +6,12 @@ import Footer from '@components/Footer';
 import { appWithTranslation } from 'next-i18next';
 import Script from 'next/script';
 import { PageWrapper } from '@components/page/PageWrapper';
+import { useRouter } from 'next/router';
+import { Button } from '@components/atoms/Button';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <>
       <Script

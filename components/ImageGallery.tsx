@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CusSwiper from '@components/Swiper';
-import Image from 'next/image';
-import { useSwiper } from 'swiper/react';
+import { Image } from '@components/atoms/Image';
 import Swiper from 'swiper';
 
 interface IImageGallery {

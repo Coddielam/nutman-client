@@ -7,6 +7,7 @@ const sectionVariants = {
     opacity: 1,
     scale: 1,
     transition: {
+      delay: 0.25,
       delayChildren: 0.3,
       staggerChildren: 0.2,
     },

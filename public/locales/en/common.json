@@ -99,7 +99,8 @@
       "followUsOnSocialMedia": "Follow Us"
     },
     "navbar": {
-      "categories": "Categories"
+      "categories": "Categories",
+      "backToPreviousPage": "Back"
     },
     "paymentFlow": {
       "step1": {

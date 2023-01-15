@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { CartContext, ICartProduct } from '@root/context/cart';
-import Image from 'next/image';
+import { Image } from '@components/atoms/Image';
 import Typography from '@components/Typography';
 import { useQuantityInput } from '@root/hooks/useQuantityInput';
 import { useTranslation } from 'react-i18next';

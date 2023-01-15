@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Image from 'next/image';
+import { Image } from '@components/atoms/Image';
 import Link from 'next/link';
 import ExpandPanel from '@components/ExpandPanel';
 import {
@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className="sticky top-0 flex justify-between align-middle w-full px-4 py-2 h-navbar shadow-sm z-50 bg-white">
+      <nav className="sticky top-0 flex flex-wrap justify-between align-middle min-h-[50px] h-fit w-full px-4 py-2 shadow-sm z-50 bg-white items-center">
         <div className="flex gap-2">
           <Button
             aria-label="Open navigation panel"
@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
             <CgMenuRight />
           </Button>
           <Link href="/">
-            <a className="h-[110%] w-20 relative">
+            <a className="h-[25px] w-20 relative">
               <Image
                 src="/nutmanlogo.png"
                 layout="fill"
@@ -74,9 +74,9 @@ const Navbar: React.FC = () => {
               />
             </a>
           </Link>
-
           {pageLoading && <CgSpinner className="h-full w-5 animate-spin" />}
         </div>
+
         <Link href="/checkout" passHref>
           <a className="flex">
             <CgShoppingCart className="" />
@@ -98,9 +98,23 @@ const Navbar: React.FC = () => {
             </motion.span>
           </a>
         </Link>
-      </nav>
-      {/* left panel */}
 
+        {router.pathname !== '/' && (
+          <div className="w-screen pt-container-px basis-full">
+            <Button
+              className="z-50 text-blue underline"
+              onClick={() => {
+                router.back();
+              }}
+            >
+              {t('backToPreviousPage')}
+              {/* Go Back */}
+            </Button>
+          </div>
+        )}
+      </nav>
+
+      {/* left panel */}
       <div
         className={cn(
           'divide-y-[1px] divide-platinum min-w-[250px] fixed top-0 z-50 h-screen py-4 px-8  transition-all duration-500 shadow-md bg-white bg-opacity-95',
